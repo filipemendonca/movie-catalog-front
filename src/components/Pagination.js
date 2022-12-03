@@ -1,16 +1,10 @@
 import React from "react";
+import { Button } from "@mui/material";
 
 const MAX_ITEMS = 9;
 const MAX_LEFT = (MAX_ITEMS - 1) / 2;
 
-const Pagination = ({
-  limit,
-  total,
-  offset,
-  setOffset,
-  lastId,
-  handleCallback,
-}) => {
+const Pagination = ({ limit, total, offset, setOffset, setPage }) => {
   const current = offset ? offset / limit + 1 : 1;
   const pages = Math.ceil(total / limit);
   const maxFirst = Math.max(pages - (MAX_ITEMS - 1), 1);
@@ -18,38 +12,63 @@ const Pagination = ({
 
   function onPageChange(page) {
     setOffset((page - 1) * limit);
-    handleCallback();
+    setPage(page);
   }
+
+  const renderControlsButton = (current, textButton, type, pages, onClick) => {
+    return type === "P" ? (
+      current === 1 ? (
+        <Button
+          variant="outlined"
+          style={{ color: "ButtonShadow" }}
+          disabled={current === 1}
+        >
+          {textButton}
+        </Button>
+      ) : (
+        <Button variant="outlined" onClick={() => onClick()}>
+          {textButton}
+        </Button>
+      )
+    ) : current === pages ? (
+      <Button
+        variant="outlined"
+        style={{ color: "ButtonShadow" }}
+        disabled={current === pages}
+      >
+        {textButton}
+      </Button>
+    ) : (
+      <Button variant="outlined" onClick={() => onClick()}>
+        {textButton}
+      </Button>
+    );
+  };
 
   return (
     <ul className="pagination">
       <li>
-        <button
-          onClick={() => onPageChange(current - 1)}
-          disabled={current === 1}
-        >
-          Previous
-        </button>
+        {renderControlsButton(current, "Previous", "P", pages, () =>
+          onPageChange(current - 1)
+        )}
       </li>
       {Array.from({ length: Math.min(MAX_ITEMS, pages) })
         .map((_, index) => index + first)
         .map((page) => (
           <li key={page}>
-            <button
+            <Button
+              variant={page === current ? "outlined" : null}
+              style={{ color: "ButtonShadow" }}
               onClick={() => onPageChange(page)}
-              className={page === current ? "pagination__item--active" : null}
             >
               {page}
-            </button>
+            </Button>
           </li>
         ))}
       <li>
-        <button
-          onClick={() => onPageChange(current + 1)}
-          disabled={current === pages}
-        >
-          Next
-        </button>
+        {renderControlsButton(current, "Next", "N", pages, () =>
+          onPageChange(current + 1)
+        )}
       </li>
     </ul>
   );

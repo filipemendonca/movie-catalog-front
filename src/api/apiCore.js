@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const ApiCore = (type, url, methodCallback) => {
+const ApiCore = (type, url, data, methodCallback) => {
   Axios({
     method: type,
     headers: {
@@ -8,9 +8,14 @@ const ApiCore = (type, url, methodCallback) => {
       "Access-Control-Allow-Origin": "*",
     },
     url: url,
-  }).then(function (response) {
-    methodCallback(response);
-  });
+    data: data,
+  })
+    .then(function (response) {
+      methodCallback(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export default ApiCore;

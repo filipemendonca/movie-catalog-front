@@ -1,3 +1,15 @@
+body {
+  background-color: #1d1d1d;
+}
+
+h1 {
+  color: aliceblue;
+}
+
+li.item {
+  color: aliceblue;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -26,6 +38,7 @@
 }
 
 .pagination__item--active {
+  color: aliceblue;
   background: none;
   font-weight: bold;
   border: none;
@@ -35,7 +48,10 @@
   outline: none;
 }
 
-.form {
-  margin: 15px;
-  padding: 25px;
+label#custom-css-outlined-input-label {
+  color: aliceblue;
+}
+
+input#custom-css-outlined-input {
+  color: aliceblue;
 }
