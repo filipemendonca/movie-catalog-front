@@ -2,7 +2,7 @@
 
 The movie-catalog-front was builded in **React.js** / **Material UI** 
 
-<p> This front-end works together the **movie-catalog** api. For more infromation you can check this: https://github.com/filipemendonca/movie-catalog <p/>
+<p> This front-end works together the <b>movie-catalog</b> api. For more infromation you can check this: https://github.com/filipemendonca/movie-catalog <p/>
 
 <p> To start this front-end you needs to clone this repository in your machine. </p>
 
